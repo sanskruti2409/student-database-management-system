@@ -144,6 +144,18 @@ Open your browser and visit:
 
 ---
 
+### 7. Troubleshooting Common Issues
+
+| Issue | Cause | Solution |
+| :--- | :--- | :--- |
+| **Port 5000 already in use** | An existing Python/Flask process is running | Run `Get-Process -Name python \| Stop-Process -Force` in PowerShell |
+| **Connection refused** | PostgreSQL service is stopped | Run `Start-Service postgresql*` in PowerShell |
+| **Password authentication failed** | Password mismatch in `.env` | Verify `DB_PASSWORD` in `.env` matches your pgAdmin master password |
+| **Relation 'students' does not exist** | Schema scripts have not been executed | Run `schema.sql` and `sample_data.sql` in pgAdmin Query Tool |
+| **ModuleNotFoundError** | Required packages missing | Run `python -m pip install -r requirements.txt` |
+
+---
+
 ## Application Pages & Interface
 
 | Page | URL Route | Description |
