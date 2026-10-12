@@ -6,7 +6,7 @@ Developed as an academic portfolio project for demonstrating core database manag
 
 ---
 
-## 📌 Project Overview
+##  Project Overview
 
 The **Student Database Management System** follows a clean **Three-Tier Architecture**:
 1. **Presentation Layer:** Vanilla HTML5 and responsive CSS3 templates styled with a calm, muted color palette.
@@ -15,20 +15,20 @@ The **Student Database Management System** follows a clean **Three-Tier Architec
 
 ---
 
-## ✨ Features
+##  Features
 
-- **📊 Dashboard Overview:** Displays live count metrics of total students, academic departments, and available courses, alongside a list of recently enrolled students.
-- **📋 Student Directory:** Displays all registered students in a clean table with department badges and enrollment dates.
-- **🔍 Search Functionality:** Filter student records by first name, last name, or email using case-insensitive PostgreSQL pattern matching (`ILIKE`).
-- **➕ Add New Student:** Web form to insert student profiles with client-side and server-side validation.
-- **🛡️ Duplicate Email Protection:** Gracefully catches database `UNIQUE` constraint violations (`psycopg2.IntegrityError`) and displays friendly flash error messages.
-- **✏️ Edit Student Details:** Pre-populates existing student data into a form for updates.
-- **🗑️ Delete Student with Confirmation:** Delete student records with a native browser prompt to prevent accidental data loss.
-- **📚 Available Courses Catalog:** Multi-table query joining `courses`, `departments`, and `enrollments` to calculate active student counts per course.
+- ** Dashboard Overview:** Displays live count metrics of total students, academic departments, and available courses, alongside a list of recently enrolled students.
+- ** Student Directory:** Displays all registered students in a clean table with department badges and enrollment dates.
+- ** Search Functionality:** Filter student records by first name, last name, or email using case-insensitive PostgreSQL pattern matching (`ILIKE`).
+- ** Add New Student:** Web form to insert student profiles with client-side and server-side validation.
+- ** Duplicate Email Protection:** Gracefully catches database `UNIQUE` constraint violations (`psycopg2.IntegrityError`) and displays friendly flash error messages.
+- ** Edit Student Details:** Pre-populates existing student data into a form for updates.
+- ** Delete Student with Confirmation:** Delete student records with a native browser prompt to prevent accidental data loss.
+- ** Available Courses Catalog:** Multi-table query joining `courses`, `departments`, and `enrollments` to calculate active student counts per course.
 
 ---
 
-## 🛠️ Technologies Used
+##  Technologies Used
 
 | Layer | Technology | Purpose |
 | :--- | :--- | :--- |
@@ -41,7 +41,7 @@ The **Student Database Management System** follows a clean **Three-Tier Architec
 
 ---
 
-## 🗄️ Database Design & Schema
+##  Database Design & Schema
 
 The database consists of **4 interrelated tables**:
 
@@ -59,7 +59,7 @@ departments (1) ────< (M) students
 
 ---
 
-## 📁 Project Directory Structure
+##  Project Directory Structure
 
 ```text
 student-database-management-system/
@@ -85,7 +85,7 @@ student-database-management-system/
 
 ---
 
-## 🚀 Setup & Installation Guide (Windows / Localhost)
+##  Setup & Installation Guide (Windows / Localhost)
 
 ### 1. Prerequisites
 - Python 3.10+ installed on your computer.
@@ -138,11 +138,11 @@ python app.py
 ```
 
 Open your browser and visit:
-👉 **`http://127.0.0.1:5000`**
+ **`http://127.0.0.1:5000`**
 
 ---
 
-## 📸 Screenshots
+##  Screenshots
 
 *(You can capture screenshots of your running application and place them in an `assets/` folder to display here)*
 
@@ -156,7 +156,7 @@ Open your browser and visit:
 
 ---
 
-## 🛡️ Security & Best Practices Implemented
+##  Security & Best Practices Implemented
 
 - **Parameterized SQL Queries:** All database interactions utilize `%s` placeholders via `psycopg2`, preventing SQL injection vulnerabilities.
 - **Environment Isolation:** Database credentials are kept in a separate `.env` file and excluded from Git commits via `.gitignore`.
@@ -165,6 +165,6 @@ Open your browser and visit:
 
 ---
 
-## 🎓 Academic Profile
+##  Academic Profile
 - **Author:** BCA Graduate & M.Sc. Computer Applications Student
 - **Project Purpose:** Academic Mini Project & Entry-Level Technical Interview Portfolio
