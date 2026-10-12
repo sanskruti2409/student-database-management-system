@@ -11,7 +11,6 @@
   </div>
 </div>
 
-<!-- Search Bar & Filters -->
 <div class="card" style="padding: 1rem 1.3rem;">
   <form method="GET" action="{{ url_for('students') }}" class="search-form">
     <input 
@@ -28,7 +27,6 @@
   </form>
 </div>
 
-<!-- Student List Table -->
 {% if students %}
   <div class="table-responsive">
     <table class="styled-table">

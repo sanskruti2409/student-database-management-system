@@ -1,41 +1,25 @@
-# ====================================================================
-# Project: Student Database Management System
-# File: app.py
-# Description: Main Flask application with routing, CRUD operations,
-#              and parameterized PostgreSQL queries.
-# ====================================================================
-
 from flask import Flask, render_template, request, redirect, url_for, flash
 import psycopg2
 from db import get_db_connection
 
 app = Flask(__name__)
-# Secret key is required by Flask for session flash messages
 app.secret_key = "student_db_secret_key_for_practice"
 
-# --------------------------------------------------------------------
-# 1. HOME DASHBOARD ROUTE
-# Displays total count statistics and recent students
-# --------------------------------------------------------------------
 @app.route("/")
 def index():
     conn = get_db_connection()
     cur = conn.cursor()
 
     try:
-        # Count total students
         cur.execute("SELECT COUNT(*) AS total_students FROM students;")
         total_students = cur.fetchone()["total_students"]
 
-        # Count total departments
         cur.execute("SELECT COUNT(*) AS total_departments FROM departments;")
         total_departments = cur.fetchone()["total_departments"]
 
-        # Count total courses
         cur.execute("SELECT COUNT(*) AS total_courses FROM courses;")
         total_courses = cur.fetchone()["total_courses"]
 
-        # Fetch 5 most recently enrolled students with their department names
         cur.execute("""
             SELECT s.student_id, s.first_name, s.last_name, s.email, 
                    s.enrollment_date, d.department_name
@@ -57,10 +41,6 @@ def index():
         cur.close()
         conn.close()
 
-# --------------------------------------------------------------------
-# 2. STUDENTS LIST & SEARCH ROUTE
-# Displays all students, supports search by name or email
-# --------------------------------------------------------------------
 @app.route("/students")
 def students():
     search_query = request.args.get("search", "").strip()
@@ -69,7 +49,6 @@ def students():
 
     try:
         if search_query:
-            # Parameterized search using ILIKE (case-insensitive in PostgreSQL)
             term = f"%{search_query}%"
             query = """
                 SELECT s.student_id, s.first_name, s.last_name, s.email, 
@@ -83,7 +62,6 @@ def students():
             """
             cur.execute(query, (term, term, term))
         else:
-            # Return all students ordered by student_id
             query = """
                 SELECT s.student_id, s.first_name, s.last_name, s.email, 
                        s.phone, s.date_of_birth, s.enrollment_date, d.department_name
@@ -99,11 +77,6 @@ def students():
         cur.close()
         conn.close()
 
-# --------------------------------------------------------------------
-# 3. ADD STUDENT ROUTE
-# GET: Displays the student creation form
-# POST: Validates inputs and inserts a new student record
-# --------------------------------------------------------------------
 @app.route("/add-student", methods=["GET", "POST"])
 def add_student():
     conn = get_db_connection()
@@ -118,15 +91,12 @@ def add_student():
             date_of_birth = request.form.get("date_of_birth", "").strip() or None
             department_id = request.form.get("department_id", "").strip() or None
 
-            # Server-side validation for required fields
             if not first_name or not last_name or not email:
                 flash("First Name, Last Name, and Email are required.", "danger")
-                # Reload departments for the form
                 cur.execute("SELECT department_id, department_name FROM departments ORDER BY department_name;")
                 departments = cur.fetchall()
                 return render_template("add_student.html", departments=departments)
 
-            # Insert student with parameterized values (prevents SQL Injection)
             insert_query = """
                 INSERT INTO students (first_name, last_name, email, phone, date_of_birth, department_id)
                 VALUES (%s, %s, %s, %s, %s, %s);
@@ -143,7 +113,6 @@ def add_student():
                 departments = cur.fetchall()
                 return render_template("add_student.html", departments=departments)
 
-        # GET Request: Fetch available departments for dropdown
         cur.execute("SELECT department_id, department_name FROM departments ORDER BY department_name;")
         departments = cur.fetchall()
         return render_template("add_student.html", departments=departments)
@@ -151,11 +120,6 @@ def add_student():
         cur.close()
         conn.close()
 
-# --------------------------------------------------------------------
-# 4. EDIT STUDENT ROUTE
-# GET: Pre-populates the form with existing student details
-# POST: Updates the student record in PostgreSQL
-# --------------------------------------------------------------------
 @app.route("/edit-student/<int:student_id>", methods=["GET", "POST"])
 def edit_student(student_id):
     conn = get_db_connection()
@@ -190,7 +154,6 @@ def edit_student(student_id):
                 flash(f"Error: Email '{email}' is already in use by another student.", "danger")
                 return redirect(url_for("edit_student", student_id=student_id))
 
-        # GET: Fetch existing student info
         cur.execute("SELECT * FROM students WHERE student_id = %s;", (student_id,))
         student = cur.fetchone()
 
@@ -198,7 +161,6 @@ def edit_student(student_id):
             flash("Student not found.", "danger")
             return redirect(url_for("students"))
 
-        # Fetch departments for select dropdown
         cur.execute("SELECT department_id, department_name FROM departments ORDER BY department_name;")
         departments = cur.fetchall()
 
@@ -207,10 +169,6 @@ def edit_student(student_id):
         cur.close()
         conn.close()
 
-# --------------------------------------------------------------------
-# 5. DELETE STUDENT ROUTE
-# Deletes a student record (with confirmation from frontend)
-# --------------------------------------------------------------------
 @app.route("/delete-student/<int:student_id>", methods=["POST"])
 def delete_student(student_id):
     conn = get_db_connection()
@@ -229,17 +187,12 @@ def delete_student(student_id):
         cur.close()
         conn.close()
 
-# --------------------------------------------------------------------
-# 6. COURSES LIST ROUTE
-# Displays all courses, their department, and total enrolled students
-# --------------------------------------------------------------------
 @app.route("/courses")
 def courses():
     conn = get_db_connection()
     cur = conn.cursor()
 
     try:
-        # Multi-table query: courses + departments + count of enrollments
         query = """
             SELECT c.course_id, c.course_code, c.course_name, c.credits,
                    d.department_name,
@@ -257,9 +210,5 @@ def courses():
         cur.close()
         conn.close()
 
-# --------------------------------------------------------------------
-# APPLICATION ENTRY POINT
-# --------------------------------------------------------------------
 if __name__ == "__main__":
-    # Runs the local development server at http://127.0.0.1:5000
     app.run(host="127.0.0.1", port=5000, debug=True)

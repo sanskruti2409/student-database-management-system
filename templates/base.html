@@ -8,7 +8,6 @@
 </head>
 <body>
 
-  <!-- Navigation Bar -->
   <nav class="navbar">
     <div class="nav-container">
       <a href="{{ url_for('index') }}" class="nav-brand">
@@ -24,10 +23,8 @@
     </div>
   </nav>
 
-  <!-- Main Content Container -->
   <main class="main-content">
 
-    <!-- Flash Messages (Success / Error / Info) -->
     {% with messages = get_flashed_messages(with_categories=true) %}
       {% if messages %}
         {% for category, message in messages %}
@@ -39,12 +36,10 @@
     {% endwith %}
 
     {% block content %}
-    <!-- Child templates will insert content here -->
     {% endblock %}
 
   </main>
 
-  <!-- Simple Footer -->
   <footer class="footer">
     <p>Student Database Management System &bull; Built with PostgreSQL &amp; Flask</p>
   </footer>

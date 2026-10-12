@@ -1,14 +1,3 @@
-/* ====================================================================
-   Student Database Management System
-   Stylesheet: static/css/style.css
-   Color Palette:
-     - Warm off-white background: #f8f9fa
-     - Dark charcoal text: #2b2d42
-     - Pale blue cards and buttons: #5b8db8 / #edf3f8
-     - Light lavender accents: #e8e5f7 / #584b81
-     - Soft sage green messages: #e7f3e8 / #2e6235
-   ==================================================================== */
-
 :root {
   --bg-color: #f8f9fa;
   --surface-color: #ffffff;
@@ -16,22 +5,18 @@
   --text-muted: #6c757d;
   --border-color: #e2e6eb;
 
-  /* Pale Blue */
   --blue-primary: #507ea6;
   --blue-hover: #41688b;
   --blue-light: #edf4fa;
 
-  /* Light Lavender */
   --lavender-accent: #695b95;
   --lavender-light: #f0edf9;
   --lavender-border: #dcd6f1;
 
-  /* Soft Sage Green */
   --sage-bg: #eaf5eb;
   --sage-border: #c8e3cc;
   --sage-text: #275630;
 
-  /* Soft Coral / Danger */
   --danger-bg: #fdf0f0;
   --danger-border: #f7cece;
   --danger-text: #8c2929;
@@ -60,9 +45,6 @@ body {
   flex-direction: column;
 }
 
-/* --------------------------------------------------------------------
-   Navigation Bar
-   -------------------------------------------------------------------- */
 .navbar {
   background-color: var(--surface-color);
   border-bottom: 1px solid var(--border-color);
@@ -127,9 +109,6 @@ body {
   font-weight: 600;
 }
 
-/* --------------------------------------------------------------------
-   Main Container & Layout
-   -------------------------------------------------------------------- */
 .main-content {
   max-width: 1100px;
   width: 100%;
@@ -159,9 +138,6 @@ body {
   margin-top: 0.2rem;
 }
 
-/* --------------------------------------------------------------------
-   Flash Messages (Alerts)
-   -------------------------------------------------------------------- */
 .alert {
   padding: 0.85rem 1.1rem;
   border-radius: var(--radius-sm);
@@ -190,9 +166,6 @@ body {
   color: #24527a;
 }
 
-/* --------------------------------------------------------------------
-   Dashboard Cards
-   -------------------------------------------------------------------- */
 .stats-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
@@ -240,9 +213,6 @@ body {
   color: var(--lavender-accent);
 }
 
-/* --------------------------------------------------------------------
-   Panels & Cards
-   -------------------------------------------------------------------- */
 .card {
   background-color: var(--surface-color);
   border: 1px solid var(--border-color);
@@ -259,9 +229,6 @@ body {
   color: var(--text-main);
 }
 
-/* --------------------------------------------------------------------
-   Buttons
-   -------------------------------------------------------------------- */
 .btn {
   display: inline-flex;
   align-items: center;
@@ -309,9 +276,6 @@ body {
   font-size: 0.82rem;
 }
 
-/* --------------------------------------------------------------------
-   Tables
-   -------------------------------------------------------------------- */
 .table-responsive {
   overflow-x: auto;
   border-radius: var(--radius-sm);
@@ -354,9 +318,6 @@ body {
   align-items: center;
 }
 
-/* --------------------------------------------------------------------
-   Forms & Search
-   -------------------------------------------------------------------- */
 .search-form {
   display: flex;
   gap: 0.5rem;
@@ -422,9 +383,6 @@ body {
   margin-top: 1.5rem;
 }
 
-/* --------------------------------------------------------------------
-   Badges & Tags
-   -------------------------------------------------------------------- */
 .tag {
   display: inline-block;
   font-size: 0.78rem;
@@ -445,9 +403,6 @@ body {
   border: 1px solid #d4e4f3;
 }
 
-/* --------------------------------------------------------------------
-   Empty State
-   -------------------------------------------------------------------- */
 .empty-state {
   text-align: center;
   padding: 3rem 1.5rem;
@@ -468,9 +423,6 @@ body {
   margin-bottom: 1.2rem;
 }
 
-/* --------------------------------------------------------------------
-   Footer
-   -------------------------------------------------------------------- */
 .footer {
   text-align: center;
   padding: 1.2rem;
