@@ -1,9 +1,10 @@
+import os
 from flask import Flask, render_template, request, redirect, url_for, flash
 import psycopg2
 from db import get_db_connection
 
 app = Flask(__name__)
-app.secret_key = "student_db_secret_key_for_practice"
+app.secret_key = os.getenv("SECRET_KEY", "student_mgmt_secret_key_for_practice")
 
 @app.route("/")
 def index():

@@ -1,4 +1,4 @@
-# Student Database Management System
+# Student Management System
 
 A beginner-friendly college mini project built with **Python (Flask)** and **PostgreSQL**. This application manages student academic records, departments, and course enrollments using clean relational database principles and parameterized SQL queries.
 
@@ -6,29 +6,29 @@ Developed as an academic portfolio project for demonstrating core database manag
 
 ---
 
-##  Project Overview
+## Project Overview
 
-The **Student Database Management System** follows a clean **Three-Tier Architecture**:
+The **Student Management System** follows a clean **Three-Tier Architecture**:
 1. **Presentation Layer:** Vanilla HTML5 and responsive CSS3 templates styled with a calm, muted color palette.
 2. **Application / Backend Layer:** Python Flask server handling HTTP requests and routing.
 3. **Database Layer:** PostgreSQL relational database with referential integrity, constraints, and relational joins.
 
 ---
 
-##  Features
+## Features
 
-- ** Dashboard Overview:** Displays live count metrics of total students, academic departments, and available courses, alongside a list of recently enrolled students.
-- ** Student Directory:** Displays all registered students in a clean table with department badges and enrollment dates.
-- ** Search Functionality:** Filter student records by first name, last name, or email using case-insensitive PostgreSQL pattern matching (`ILIKE`).
-- ** Add New Student:** Web form to insert student profiles with client-side and server-side validation.
-- ** Duplicate Email Protection:** Gracefully catches database `UNIQUE` constraint violations (`psycopg2.IntegrityError`) and displays friendly flash error messages.
-- ** Edit Student Details:** Pre-populates existing student data into a form for updates.
-- ** Delete Student with Confirmation:** Delete student records with a native browser prompt to prevent accidental data loss.
-- ** Available Courses Catalog:** Multi-table query joining `courses`, `departments`, and `enrollments` to calculate active student counts per course.
+- **Dashboard Overview:** Displays live count metrics of total students, academic departments, and available courses, alongside a list of recently enrolled students.
+- **Student Directory:** Displays all registered students in a clean table with department badges and enrollment dates.
+- **Search Functionality:** Filter student records by first name, last name, or email using case-insensitive PostgreSQL pattern matching (`ILIKE`).
+- **Add New Student:** Web form to insert student profiles with client-side and server-side validation.
+- **Duplicate Email Protection:** Gracefully catches database `UNIQUE` constraint violations (`psycopg2.IntegrityError`) and displays friendly flash error messages.
+- **Edit Student Details:** Pre-populates existing student data into a form for updates.
+- **Delete Student with Confirmation:** Delete student records with a native browser prompt to prevent accidental data loss.
+- **Available Courses Catalog:** Multi-table query joining `courses`, `departments`, and `enrollments` to calculate active student counts per course.
 
 ---
 
-##  Technologies Used
+## Technologies Used
 
 | Layer | Technology | Purpose |
 | :--- | :--- | :--- |
@@ -41,7 +41,7 @@ The **Student Database Management System** follows a clean **Three-Tier Architec
 
 ---
 
-##  Database Design & Schema
+## Database Design & Schema
 
 The database consists of **4 interrelated tables**:
 
@@ -59,7 +59,7 @@ departments (1) ────< (M) students
 
 ---
 
-##  Project Directory Structure
+## Project Directory Structure
 
 ```text
 student-database-management-system/
@@ -69,6 +69,7 @@ student-database-management-system/
 ├── schema.sql                 # SQL script defining tables, keys, and constraints
 ├── sample_data.sql            # Seed data script for initial records
 ├── .env                       # Environment variables (DB credentials - gitignored)
+├── .env.example               # Sample environment configuration template
 ├── .gitignore                 # Files excluded from version control
 ├── README.md                  # Project documentation
 ├── templates/                 # Jinja2 HTML templates
@@ -85,7 +86,7 @@ student-database-management-system/
 
 ---
 
-##  Setup & Installation Guide (Windows / Localhost)
+## Setup & Installation Guide (Windows / Localhost)
 
 ### 1. Prerequisites
 - Python 3.10+ installed on your computer.
@@ -99,20 +100,21 @@ student-database-management-system/
 3. Open the **Query Tool** on `student_db`:
    - Open and run [`schema.sql`](schema.sql) (Press `F5`).
    - Open and run [`sample_data.sql`](sample_data.sql) (Press `F5`).
-4. Run `SELECT * FROM students;` to verify that 5 initial records appear.
+4. Run `SELECT * FROM students;` to verify that initial records appear.
 
 ---
 
 ### 3. Clone / Open the Project
-Open a terminal (PowerShell or Command Prompt) in the project directory:
+Open a terminal (PowerShell or Command Prompt) and run:
 ```powershell
-cd path\to\student-database-management-system
+git clone https://github.com/sanskruti2409/student-database-management-system.git
+cd student-database-management-system
 ```
 
 ---
 
 ### 4. Configure Environment Variables
-Create a file named `.env` in the root folder with your database credentials:
+Create a file named `.env` in the root folder with your database credentials (or copy from `.env.example`):
 ```env
 DB_HOST=localhost
 DB_PORT=5432
@@ -138,25 +140,24 @@ python app.py
 ```
 
 Open your browser and visit:
- **`http://127.0.0.1:5000`**
+**`http://127.0.0.1:5000`**
 
 ---
 
-##  Screenshots
+## Application Pages & Interface
 
-*(You can capture screenshots of your running application and place them in an `assets/` folder to display here)*
-
-| Dashboard Overview | Student Directory |
-| :---: | :---: |
-| `![Dashboard](assets/dashboard.png)` | `![Students](assets/students.png)` |
-
-| Add Student Form | Courses Catalog |
-| :---: | :---: |
-| `![Add Student](assets/add_student.png)` | `![Courses](assets/courses.png)` |
+| Page | URL Route | Description |
+| :--- | :--- | :--- |
+| **Dashboard** | `/` | Displays live counts (students, departments, courses) and recent registrations. |
+| **Student Directory** | `/students` | Tabular view of all students with department tags, search filter, and action buttons. |
+| **Add Student** | `/add-student` | Form with field validation to register a new student profile. |
+| **Edit Student** | `/edit-student/<id>` | Form pre-populated with existing student data for updating details. |
+| **Delete Student** | `/delete-student/<id>` | Deletes a student record with browser confirmation to prevent accidental loss. |
+| **Course Catalog** | `/courses` | Displays courses, credit hours, departments, and active enrollment totals. |
 
 ---
 
-##  Security & Best Practices Implemented
+## Security & Best Practices Implemented
 
 - **Parameterized SQL Queries:** All database interactions utilize `%s` placeholders via `psycopg2`, preventing SQL injection vulnerabilities.
 - **Environment Isolation:** Database credentials are kept in a separate `.env` file and excluded from Git commits via `.gitignore`.
@@ -165,6 +166,6 @@ Open your browser and visit:
 
 ---
 
-##  Academic Profile
+## Academic Profile
 - **Author:** BCA Graduate & M.Sc. Computer Applications Student
 - **Project Purpose:** Academic Mini Project & Entry-Level Technical Interview Portfolio
