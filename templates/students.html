@@ -1,0 +1,93 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="page-header">
+  <div>
+    <h1 class="page-title">Student Directory</h1>
+    <p class="page-subtitle">Manage student records, search profiles, or update information.</p>
+  </div>
+  <div>
+    <a href="{{ url_for('add_student') }}" class="btn btn-primary">+ Add New Student</a>
+  </div>
+</div>
+
+<!-- Search Bar & Filters -->
+<div class="card" style="padding: 1rem 1.3rem;">
+  <form method="GET" action="{{ url_for('students') }}" class="search-form">
+    <input 
+      type="text" 
+      name="search" 
+      class="form-control" 
+      placeholder="Search by student name or email..." 
+      value="{{ search_query }}"
+    >
+    <button type="submit" class="btn btn-primary">Search</button>
+    {% if search_query %}
+      <a href="{{ url_for('students') }}" class="btn btn-secondary">Clear</a>
+    {% endif %}
+  </form>
+</div>
+
+<!-- Student List Table -->
+{% if students %}
+  <div class="table-responsive">
+    <table class="styled-table">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Full Name</th>
+          <th>Email Address</th>
+          <th>Phone</th>
+          <th>Date of Birth</th>
+          <th>Department</th>
+          <th>Enrollment Date</th>
+          <th style="text-align: right;">Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for student in students %}
+          <tr>
+            <td>#{{ student.student_id }}</td>
+            <td><strong>{{ student.first_name }} {{ student.last_name }}</strong></td>
+            <td>{{ student.email }}</td>
+            <td>{{ student.phone or '-' }}</td>
+            <td>{{ student.date_of_birth or '-' }}</td>
+            <td>
+              {% if student.department_name %}
+                <span class="tag tag-lavender">{{ student.department_name }}</span>
+              {% else %}
+                <span style="color: var(--text-muted); font-size: 0.85rem;">Unassigned</span>
+              {% endif %}
+            </td>
+            <td>{{ student.enrollment_date }}</td>
+            <td style="text-align: right;">
+              <div class="action-buttons" style="justify-content: flex-end;">
+                <a href="{{ url_for('edit_student', student_id=student.student_id) }}" class="btn btn-secondary btn-sm">Edit</a>
+                <form 
+                  method="POST" 
+                  action="{{ url_for('delete_student', student_id=student.student_id) }}" 
+                  style="display: inline;"
+                  onsubmit="return confirm('Are you sure you want to delete {{ student.first_name }} {{ student.last_name }}?');"
+                >
+                  <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                </form>
+              </div>
+            </td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+{% else %}
+  <div class="empty-state">
+    <h3>No students found</h3>
+    {% if search_query %}
+      <p>No results matched your search: "<strong>{{ search_query }}</strong>".</p>
+      <a href="{{ url_for('students') }}" class="btn btn-secondary">View All Students</a>
+    {% else %}
+      <p>There are currently no student records in the database.</p>
+      <a href="{{ url_for('add_student') }}" class="btn btn-primary">+ Add New Student</a>
+    {% endif %}
+  </div>
+{% endif %}
+{% endblock %}

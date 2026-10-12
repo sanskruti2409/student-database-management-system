@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Student Database Management System</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+
+  <!-- Navigation Bar -->
+  <nav class="navbar">
+    <div class="nav-container">
+      <a href="{{ url_for('index') }}" class="nav-brand">
+        Student Database Management System
+        <span class="badge-pill">College Project</span>
+      </a>
+      <ul class="nav-links">
+        <li><a href="{{ url_for('index') }}" class="nav-link {% if request.endpoint == 'index' %}active{% endif %}">Dashboard</a></li>
+        <li><a href="{{ url_for('students') }}" class="nav-link {% if request.endpoint in ['students', 'edit_student'] %}active{% endif %}">Students</a></li>
+        <li><a href="{{ url_for('add_student') }}" class="nav-link {% if request.endpoint == 'add_student' %}active{% endif %}">+ Add Student</a></li>
+        <li><a href="{{ url_for('courses') }}" class="nav-link {% if request.endpoint == 'courses' %}active{% endif %}">Courses</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- Main Content Container -->
+  <main class="main-content">
+
+    <!-- Flash Messages (Success / Error / Info) -->
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %}
+        {% for category, message in messages %}
+          <div class="alert alert-{{ category }}">
+            <span>{{ message }}</span>
+          </div>
+        {% endfor %}
+      {% endif %}
+    {% endwith %}
+
+    {% block content %}
+    <!-- Child templates will insert content here -->
+    {% endblock %}
+
+  </main>
+
+  <!-- Simple Footer -->
+  <footer class="footer">
+    <p>Student Database Management System &bull; Built with PostgreSQL &amp; Flask</p>
+  </footer>
+
+</body>
+</html>

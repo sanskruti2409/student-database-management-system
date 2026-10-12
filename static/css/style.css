@@ -1,0 +1,482 @@
+/* ====================================================================
+   Student Database Management System
+   Stylesheet: static/css/style.css
+   Color Palette:
+     - Warm off-white background: #f8f9fa
+     - Dark charcoal text: #2b2d42
+     - Pale blue cards and buttons: #5b8db8 / #edf3f8
+     - Light lavender accents: #e8e5f7 / #584b81
+     - Soft sage green messages: #e7f3e8 / #2e6235
+   ==================================================================== */
+
+:root {
+  --bg-color: #f8f9fa;
+  --surface-color: #ffffff;
+  --text-main: #2b2d42;
+  --text-muted: #6c757d;
+  --border-color: #e2e6eb;
+
+  /* Pale Blue */
+  --blue-primary: #507ea6;
+  --blue-hover: #41688b;
+  --blue-light: #edf4fa;
+
+  /* Light Lavender */
+  --lavender-accent: #695b95;
+  --lavender-light: #f0edf9;
+  --lavender-border: #dcd6f1;
+
+  /* Soft Sage Green */
+  --sage-bg: #eaf5eb;
+  --sage-border: #c8e3cc;
+  --sage-text: #275630;
+
+  /* Soft Coral / Danger */
+  --danger-bg: #fdf0f0;
+  --danger-border: #f7cece;
+  --danger-text: #8c2929;
+  --danger-btn: #cb5353;
+  --danger-btn-hover: #b44242;
+
+  --shadow-sm: 0 2px 6px rgba(43, 45, 66, 0.05);
+  --shadow-md: 0 4px 12px rgba(43, 45, 66, 0.07);
+  --radius-sm: 6px;
+  --radius-md: 10px;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+  background-color: var(--bg-color);
+  color: var(--text-main);
+  line-height: 1.6;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* --------------------------------------------------------------------
+   Navigation Bar
+   -------------------------------------------------------------------- */
+.navbar {
+  background-color: var(--surface-color);
+  border-bottom: 1px solid var(--border-color);
+  padding: 0.9rem 1.5rem;
+  box-shadow: var(--shadow-sm);
+}
+
+.nav-container {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.nav-brand {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--text-main);
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.nav-brand span.badge-pill {
+  font-size: 0.75rem;
+  background-color: var(--lavender-light);
+  color: var(--lavender-accent);
+  padding: 0.2rem 0.6rem;
+  border-radius: 20px;
+  border: 1px solid var(--lavender-border);
+  font-weight: 600;
+}
+
+.nav-links {
+  display: flex;
+  gap: 0.6rem;
+  list-style: none;
+}
+
+.nav-link {
+  color: var(--text-muted);
+  text-decoration: none;
+  font-size: 0.92rem;
+  font-weight: 500;
+  padding: 0.45rem 0.85rem;
+  border-radius: var(--radius-sm);
+  transition: all 0.2s ease;
+}
+
+.nav-link:hover {
+  background-color: var(--blue-light);
+  color: var(--blue-primary);
+}
+
+.nav-link.active {
+  background-color: var(--lavender-light);
+  color: var(--lavender-accent);
+  font-weight: 600;
+}
+
+/* --------------------------------------------------------------------
+   Main Container & Layout
+   -------------------------------------------------------------------- */
+.main-content {
+  max-width: 1100px;
+  width: 100%;
+  margin: 2rem auto;
+  padding: 0 1.2rem;
+  flex: 1;
+}
+
+.page-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.page-title {
+  font-size: 1.55rem;
+  font-weight: 700;
+  color: var(--text-main);
+}
+
+.page-subtitle {
+  font-size: 0.95rem;
+  color: var(--text-muted);
+  margin-top: 0.2rem;
+}
+
+/* --------------------------------------------------------------------
+   Flash Messages (Alerts)
+   -------------------------------------------------------------------- */
+.alert {
+  padding: 0.85rem 1.1rem;
+  border-radius: var(--radius-sm);
+  margin-bottom: 1.5rem;
+  font-size: 0.92rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.alert-success {
+  background-color: var(--sage-bg);
+  border: 1px solid var(--sage-border);
+  color: var(--sage-text);
+}
+
+.alert-danger {
+  background-color: var(--danger-bg);
+  border: 1px solid var(--danger-border);
+  color: var(--danger-text);
+}
+
+.alert-info {
+  background-color: var(--blue-light);
+  border: 1px solid #cce1f2;
+  color: #24527a;
+}
+
+/* --------------------------------------------------------------------
+   Dashboard Cards
+   -------------------------------------------------------------------- */
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1.2rem;
+  margin-bottom: 2rem;
+}
+
+.stat-card {
+  background: var(--surface-color);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  padding: 1.3rem;
+  box-shadow: var(--shadow-sm);
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.stat-card:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+
+.stat-label {
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: var(--text-muted);
+  font-weight: 600;
+}
+
+.stat-value {
+  font-size: 2.1rem;
+  font-weight: 700;
+  color: var(--blue-primary);
+  margin: 0.3rem 0;
+}
+
+.stat-desc {
+  font-size: 0.82rem;
+  color: var(--text-muted);
+}
+
+.stat-card.lavender .stat-value {
+  color: var(--lavender-accent);
+}
+
+/* --------------------------------------------------------------------
+   Panels & Cards
+   -------------------------------------------------------------------- */
+.card {
+  background-color: var(--surface-color);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  padding: 1.5rem;
+  box-shadow: var(--shadow-sm);
+  margin-bottom: 1.8rem;
+}
+
+.card-title {
+  font-size: 1.15rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+  color: var(--text-main);
+}
+
+/* --------------------------------------------------------------------
+   Buttons
+   -------------------------------------------------------------------- */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.52rem 1.1rem;
+  border-radius: var(--radius-sm);
+  font-size: 0.9rem;
+  font-weight: 500;
+  text-decoration: none;
+  cursor: pointer;
+  border: 1px solid transparent;
+  transition: all 0.2s ease;
+}
+
+.btn-primary {
+  background-color: var(--blue-primary);
+  color: #ffffff;
+}
+
+.btn-primary:hover {
+  background-color: var(--blue-hover);
+}
+
+.btn-secondary {
+  background-color: #f1f3f5;
+  color: var(--text-main);
+  border-color: var(--border-color);
+}
+
+.btn-secondary:hover {
+  background-color: #e5e8ec;
+}
+
+.btn-danger {
+  background-color: var(--danger-btn);
+  color: #ffffff;
+}
+
+.btn-danger:hover {
+  background-color: var(--danger-btn-hover);
+}
+
+.btn-sm {
+  padding: 0.3rem 0.65rem;
+  font-size: 0.82rem;
+}
+
+/* --------------------------------------------------------------------
+   Tables
+   -------------------------------------------------------------------- */
+.table-responsive {
+  overflow-x: auto;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border-color);
+  background-color: var(--surface-color);
+}
+
+.styled-table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+  font-size: 0.92rem;
+}
+
+.styled-table th {
+  background-color: #f5f7fa;
+  color: #495057;
+  font-weight: 600;
+  padding: 0.75rem 1rem;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.styled-table td {
+  padding: 0.75rem 1rem;
+  border-bottom: 1px solid var(--border-color);
+  color: var(--text-main);
+}
+
+.styled-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.styled-table tbody tr:hover {
+  background-color: #fafbfc;
+}
+
+.action-buttons {
+  display: flex;
+  gap: 0.4rem;
+  align-items: center;
+}
+
+/* --------------------------------------------------------------------
+   Forms & Search
+   -------------------------------------------------------------------- */
+.search-form {
+  display: flex;
+  gap: 0.5rem;
+  max-width: 420px;
+  width: 100%;
+}
+
+.form-control {
+  width: 100%;
+  padding: 0.52rem 0.85rem;
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-sm);
+  font-size: 0.9rem;
+  color: var(--text-main);
+  background-color: #ffffff;
+  outline: none;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.form-control:focus {
+  border-color: var(--blue-primary);
+  box-shadow: 0 0 0 3px rgba(80, 126, 166, 0.15);
+}
+
+.form-group {
+  margin-bottom: 1.2rem;
+}
+
+.form-label {
+  display: block;
+  font-size: 0.88rem;
+  font-weight: 600;
+  margin-bottom: 0.35rem;
+  color: var(--text-main);
+}
+
+.form-label .required {
+  color: var(--danger-btn);
+  margin-left: 2px;
+}
+
+.form-hint {
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  margin-top: 0.25rem;
+}
+
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.2rem;
+}
+
+@media (max-width: 650px) {
+  .form-row {
+    grid-template-columns: 1fr;
+  }
+}
+
+.form-actions {
+  display: flex;
+  gap: 0.8rem;
+  margin-top: 1.5rem;
+}
+
+/* --------------------------------------------------------------------
+   Badges & Tags
+   -------------------------------------------------------------------- */
+.tag {
+  display: inline-block;
+  font-size: 0.78rem;
+  font-weight: 600;
+  padding: 0.2rem 0.55rem;
+  border-radius: 4px;
+}
+
+.tag-lavender {
+  background-color: var(--lavender-light);
+  color: var(--lavender-accent);
+  border: 1px solid var(--lavender-border);
+}
+
+.tag-blue {
+  background-color: var(--blue-light);
+  color: var(--blue-primary);
+  border: 1px solid #d4e4f3;
+}
+
+/* --------------------------------------------------------------------
+   Empty State
+   -------------------------------------------------------------------- */
+.empty-state {
+  text-align: center;
+  padding: 3rem 1.5rem;
+  background-color: var(--surface-color);
+  border-radius: var(--radius-md);
+  border: 1px dashed var(--border-color);
+}
+
+.empty-state h3 {
+  font-size: 1.15rem;
+  margin-bottom: 0.4rem;
+  color: var(--text-main);
+}
+
+.empty-state p {
+  color: var(--text-muted);
+  font-size: 0.9rem;
+  margin-bottom: 1.2rem;
+}
+
+/* --------------------------------------------------------------------
+   Footer
+   -------------------------------------------------------------------- */
+.footer {
+  text-align: center;
+  padding: 1.2rem;
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  border-top: 1px solid var(--border-color);
+  background-color: var(--surface-color);
+  margin-top: auto;
+}

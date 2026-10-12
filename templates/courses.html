@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="page-header">
+  <div>
+    <h1 class="page-title">Available Courses</h1>
+    <p class="page-subtitle">Academic course catalog showing credit hours and enrollment count.</p>
+  </div>
+</div>
+
+<div class="card">
+  {% if courses %}
+    <div class="table-responsive">
+      <table class="styled-table">
+        <thead>
+          <tr>
+            <th>Course Code</th>
+            <th>Course Title</th>
+            <th>Department</th>
+            <th>Credits</th>
+            <th>Enrolled Students</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for course in courses %}
+            <tr>
+              <td><span class="tag tag-blue">{{ course.course_code }}</span></td>
+              <td><strong>{{ course.course_name }}</strong></td>
+              <td>
+                <span class="tag tag-lavender">{{ course.department_name }}</span>
+              </td>
+              <td>{{ course.credits }} Credits</td>
+              <td>
+                {% if course.enrolled_students > 0 %}
+                  <strong>{{ course.enrolled_students }}</strong> students
+                {% else %}
+                  <span style="color: var(--text-muted);">None</span>
+                {% endif %}
+              </td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  {% else %}
+    <div class="empty-state">
+      <h3>No courses available</h3>
+      <p>There are currently no courses registered in the database.</p>
+    </div>
+  {% endif %}
+</div>
+{% endblock %}
